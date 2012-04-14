@@ -1,12 +1,11 @@
 package Database::Migrator::Core;
 {
-  $Database::Migrator::Core::VERSION = '0.01';
+  $Database::Migrator::Core::VERSION = '0.02';
 }
 
 use strict;
 use warnings;
 use namespace::autoclean;
-use autodie ':all';
 
 use Database::Migrator::Types qw( ArrayRef Bool Dir File Maybe Str );
 use DBI;
@@ -302,7 +301,7 @@ Database::Migrator::Core - Core role for Database::Migrator implementation class
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 

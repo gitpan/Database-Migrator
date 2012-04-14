@@ -1,6 +1,6 @@
 package Database::Migrator;
 {
-  $Database::Migrator::VERSION = '0.01';
+  $Database::Migrator::VERSION = '0.02';
 }
 
 # ABSTRACT: A system for implementing database migrations
@@ -15,7 +15,7 @@ Database::Migrator - A system for implementing database migrations
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 DESCRIPTION
 
