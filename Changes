@@ -1,3 +1,8 @@
+0.03     2012-04-14
+
+- Added missing prereqs on MooseX::Types and MooseX::Types::Path::Class.
+
+
 0.02     2012-04-14
 
 - Remove autodie from prereqs since there's nothing in the code that needs it

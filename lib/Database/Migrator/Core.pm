@@ -1,6 +1,6 @@
 package Database::Migrator::Core;
 {
-  $Database::Migrator::Core::VERSION = '0.02';
+  $Database::Migrator::Core::VERSION = '0.03';
 }
 
 use strict;
@@ -301,7 +301,7 @@ Database::Migrator::Core - Core role for Database::Migrator implementation class
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 
