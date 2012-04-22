@@ -1,3 +1,10 @@
+0.04     2012-04-22
+
+- The logger attribute was not lazy, so it could be built before the quiet
+  option was processed. This effectively meant that the quiet option was
+  ignored.
+
+
 0.03     2012-04-14
 
 - Added missing prereqs on MooseX::Types and MooseX::Types::Path::Class.

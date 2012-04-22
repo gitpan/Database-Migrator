@@ -1,6 +1,6 @@
 package Database::Migrator::Core;
 {
-  $Database::Migrator::Core::VERSION = '0.03';
+  $Database::Migrator::Core::VERSION = '0.04';
 }
 
 use strict;
@@ -92,6 +92,7 @@ has logger => (
     traits  => ['NoGetopt'],
     is      => 'ro',
     isa     => duck_type( [qw( debug info )] ),
+    lazy    => 1,
     builder => '_build_logger',
 );
 
@@ -301,7 +302,7 @@ Database::Migrator::Core - Core role for Database::Migrator implementation class
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 
