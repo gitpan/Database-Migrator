@@ -1,11 +1,11 @@
 package Database::Migrator;
 {
-  $Database::Migrator::VERSION = '0.04';
+  $Database::Migrator::VERSION = '0.05';
 }
 
 # ABSTRACT: A system for implementing database migrations
 
-
+__END__
 
 =pod
 
@@ -15,7 +15,7 @@ Database::Migrator - A system for implementing database migrations
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 DESCRIPTION
 
@@ -193,14 +193,10 @@ Dave Rolsky <autarch@urth.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2012 by MaxMind, LLC.
+This software is Copyright (c) 2013 by MaxMind, LLC.
 
 This is free software, licensed under:
 
   The Artistic License 2.0 (GPL Compatible)
 
 =cut
-
-
-__END__
-

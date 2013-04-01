@@ -1,10 +1,14 @@
 package Database::Migrator::Types;
 {
-  $Database::Migrator::Types::VERSION = '0.04';
+  $Database::Migrator::Types::VERSION = '0.05';
 }
 
 use strict;
 use warnings;
+
+use MooseX::Types::Moose;
+use MooseX::Types::Path::Class;
+use Path::Class ();
 
 use parent 'MooseX::Types::Combine';
 

@@ -10,6 +10,8 @@ dist.ini
 lib/Database/Migrator.pm
 lib/Database/Migrator/Core.pm
 lib/Database/Migrator/Types.pm
+lib/Test/Database/Migrator.pm
+t/author-pod-spell.t
 t/compile.t
 t/release-cpan-changes.t
 t/release-eol.t

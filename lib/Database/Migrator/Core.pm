@@ -1,6 +1,6 @@
 package Database::Migrator::Core;
 {
-  $Database::Migrator::Core::VERSION = '0.04';
+  $Database::Migrator::Core::VERSION = '0.05';
 }
 
 use strict;
@@ -10,8 +10,6 @@ use namespace::autoclean;
 use Database::Migrator::Types qw( ArrayRef Bool Dir File Maybe Str );
 use DBI;
 use Eval::Closure qw( eval_closure );
-use File::Slurp qw( read_file );
-use IPC::Run3 qw( run3 );
 use Log::Dispatch;
 use Moose::Util::TypeConstraints qw( duck_type );
 
@@ -20,9 +18,8 @@ use Moose::Role;
 with 'MooseX::Getopt::Dashes';
 
 requires qw(
-    _build_database_exists
-    _build_dbh
     _create_database
+    _drop_database
     _run_ddl
 );
 
@@ -32,7 +29,7 @@ has database => (
     required => 1,
 );
 
-has [qw( user password host port )] => (
+has [qw( username password host port )] => (
     is      => 'ro',
     isa     => Maybe [Str],
     default => undef,
@@ -114,6 +111,18 @@ has dry_run => (
     default => 0,
 );
 
+around BUILDARGS => sub {
+    my $orig  = shift;
+    my $class = shift;
+
+    my $p = $class->$orig(@_);
+
+    $p->{username} = delete $p->{user}
+        if exists $p->{user};
+
+    return $p;
+};
+
 sub BUILD { }
 after BUILD => sub {
     my $self = shift;
@@ -131,9 +140,7 @@ sub create_or_update_database {
     }
     else {
         $self->_create_database();
-
-        my $schema_ddl = read_file( $self->schema_file()->stringify() );
-        $self->_run_ddl($schema_ddl);
+        $self->_run_ddl( $self->schema_file() );
     }
 
     $self->_run_migrations();
@@ -161,10 +168,7 @@ sub _run_one_migration {
         my $basename = $file->basename();
         if ( $file =~ /\.sql/ ) {
             $self->logger()->debug(" - running $basename as sql");
-
-            my $migration_ddl = read_file( $file->stringify() );
-
-            $self->_run_ddl($migration_ddl);
+            $self->_run_ddl($file);
         }
         else {
             $self->logger()->debug(" - running $basename as perl code");
@@ -185,45 +189,6 @@ sub _run_one_migration {
     $self->dbh()->do( "INSERT INTO $table VALUES (?)", undef, $name );
 
     return;
-}
-
-sub _run_command {
-    my $self    = shift;
-    my $command = shift;
-    my $input   = shift;
-
-    my $stdout = q{};
-    my $stderr = q{};
-
-    my $handle_stdout = sub {
-        $self->logger()->debug(@_);
-
-        $stdout .= $_ for @_;
-    };
-
-    my $handle_stderr = sub {
-        $self->logger()->debug(@_);
-
-        $stderr .= $_ for @_;
-    };
-
-    $self->logger()->debug("Running command: [@{$command}]");
-
-    return if $self->dry_run();
-
-    run3( $command, \$input, $handle_stdout, $handle_stderr );
-
-    if ($?) {
-        my $exit = $? >> 8;
-
-        my $msg = "@{$command} returned an exit code of $exit\n";
-        $msg .= "\nSTDOUT:\n$stdout\n\n" if length $stdout;
-        $msg .= "\nSTDERR:\n$stderr\n\n" if length $stderr;
-
-        die $msg;
-    }
-
-    return $stdout;
 }
 
 sub _build_pending_migrations {
@@ -264,19 +229,30 @@ sub _build_logger {
     return Log::Dispatch->new( outputs => [$outputs] );
 }
 
-around _build_dbh => sub {
-    my $orig = shift;
+sub _build_database_exists {
     my $self = shift;
 
-    my $dbh = $self->$orig(@_);
+    local $@;
+    return eval { $self->_build_dbh() } ? 1 : 0;
+}
 
-    $dbh->{RaiseError}         = 1;
-    $dbh->{PrintError}         = 1;
-    $dbh->{PrintWarn}          = 1;
-    $dbh->{ShowErrorStatement} = 1;
+sub _build_dbh {
+    my $self = shift;
 
-    return $dbh;
-};
+    my ($driver) = ( ref $self ) =~ /::(\w+)$/;
+
+    return DBI->connect(
+        'dbi:' . $driver . ':database=' . $self->database(),
+        $self->username(),
+        $self->password(),
+        {
+            RaiseError         => 1,
+            PrintError         => 1,
+            PrintWarn          => 1,
+            ShowErrorStatement => 1,
+        },
+    );
+}
 
 sub  _numeric_or_alpha_sort {
     my ( $a_num, $a_alpha ) = $a->basename() =~ /^(\d+)(.+)/;
@@ -292,7 +268,7 @@ sub  _numeric_or_alpha_sort {
 
 # ABSTRACT: Core role for Database::Migrator implementation classes
 
-
+__END__
 
 =pod
 
@@ -302,7 +278,7 @@ Database::Migrator::Core - Core role for Database::Migrator implementation class
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 SYNOPSIS
 
@@ -334,7 +310,7 @@ provided via the command line or you can set defaults for them in a subclass.
 
 The name of the database that will be created or migrated. This is required.
 
-=item * user, password, host, port
+=item * username, password, host, port
 
 These parameters are used when connecting to the database. They are all
 optional.
@@ -444,14 +420,10 @@ Dave Rolsky <autarch@urth.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2012 by MaxMind, LLC.
+This software is Copyright (c) 2013 by MaxMind, LLC.
 
 This is free software, licensed under:
 
   The Artistic License 2.0 (GPL Compatible)
 
 =cut
-
-
-__END__
-
