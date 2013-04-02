@@ -1,6 +1,6 @@
 package Test::Database::Migrator;
 {
-  $Test::Database::Migrator::VERSION = '0.05';
+  $Test::Database::Migrator::VERSION = '0.06';
 }
 
 use strict;

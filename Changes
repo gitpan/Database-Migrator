@@ -1,3 +1,8 @@
+0.06     2013-04-02
+
+- Fixed some documentation errors.
+
+
 0.05     2013-04-01
 
 - Renamed the user attribute to username, but the former will still be

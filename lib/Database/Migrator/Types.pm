@@ -1,6 +1,6 @@
 package Database::Migrator::Types;
 {
-  $Database::Migrator::Types::VERSION = '0.05';
+  $Database::Migrator::Types::VERSION = '0.06';
 }
 
 use strict;
