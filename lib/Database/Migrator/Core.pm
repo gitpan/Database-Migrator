@@ -1,6 +1,9 @@
 package Database::Migrator::Core;
 {
-  $Database::Migrator::Core::VERSION = '0.06';
+  $Database::Migrator::Core::VERSION = '0.07';
+}
+BEGIN {
+  $Database::Migrator::Core::AUTHORITY = 'cpan:DROLSKY';
 }
 
 use strict;
@@ -19,6 +22,7 @@ with 'MooseX::Getopt::Dashes';
 
 requires qw(
     _create_database
+    _driver_name
     _drop_database
     _run_ddl
 );
@@ -239,10 +243,8 @@ sub _build_database_exists {
 sub _build_dbh {
     my $self = shift;
 
-    my ($driver) = ( ref $self ) =~ /::(\w+)$/;
-
     return DBI->connect(
-        'dbi:' . $driver . ':database=' . $self->database(),
+        'dbi:' . $self->_driver_name() . ':database=' . $self->database(),
         $self->username(),
         $self->password(),
         {
@@ -264,6 +266,7 @@ sub  _numeric_or_alpha_sort {
     return $a_num <=> $b_num or $a_alpha cmp $b_alpha;
 }
 
+
 1;
 
 # ABSTRACT: Core role for Database::Migrator implementation classes
@@ -278,7 +281,7 @@ Database::Migrator::Core - Core role for Database::Migrator implementation class
 
 =head1 VERSION
 
-version 0.06
+version 0.07
 
 =head1 SYNOPSIS
 
@@ -298,6 +301,9 @@ to DBMS-specific classes.
 
 You can then subclass these DBMS-specific classes to provide defaults for
 various attributes, or to override some of the implementation.
+
+=for Pod::Coverage   BUILD
+  create_or_update_database
 
 =head1 PUBLIC ATTRIBUTES
 
@@ -363,6 +369,10 @@ following methods. All of these methods should throw an error
 This should create an I<empty> database. This role will take care of executing
 the DDL for defining the schema.
 
+=head2 $migration->_driver_name()
+
+This return a string containing the DBI driver name, such as "mysql" or "Pg".
+
 =head2 $migration->_drop_database()
 
 This should drop the database. Right now it is only used for testing.
@@ -414,7 +424,7 @@ Dave Rolsky <autarch@urth.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2013 by MaxMind, LLC.
+This software is Copyright (c) 2013 by MaxMind, Inc..
 
 This is free software, licensed under:
 

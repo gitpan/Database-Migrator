@@ -1,6 +1,9 @@
 package Database::Migrator;
 {
-  $Database::Migrator::VERSION = '0.06';
+  $Database::Migrator::VERSION = '0.07';
+}
+BEGIN {
+  $Database::Migrator::AUTHORITY = 'cpan:DROLSKY';
 }
 
 # ABSTRACT: A system for implementing database migrations
@@ -15,7 +18,7 @@ Database::Migrator - A system for implementing database migrations
 
 =head1 VERSION
 
-version 0.06
+version 0.07
 
 =head1 DESCRIPTION
 
@@ -193,7 +196,7 @@ Dave Rolsky <autarch@urth.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2013 by MaxMind, LLC.
+This software is Copyright (c) 2013 by MaxMind, Inc..
 
 This is free software, licensed under:
 

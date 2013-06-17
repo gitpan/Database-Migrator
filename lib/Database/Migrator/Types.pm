@@ -1,6 +1,9 @@
 package Database::Migrator::Types;
 {
-  $Database::Migrator::Types::VERSION = '0.06';
+  $Database::Migrator::Types::VERSION = '0.07';
+}
+BEGIN {
+  $Database::Migrator::Types::AUTHORITY = 'cpan:DROLSKY';
 }
 
 use strict;
@@ -18,3 +21,7 @@ __PACKAGE__->provide_types_from(
 );
 
 1;
+
+=for Pod::Coverage .*
+
+=cut

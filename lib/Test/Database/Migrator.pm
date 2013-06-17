@@ -1,6 +1,9 @@
 package Test::Database::Migrator;
 {
-  $Test::Database::Migrator::VERSION = '0.06';
+  $Test::Database::Migrator::VERSION = '0.07';
+}
+BEGIN {
+  $Test::Database::Migrator::AUTHORITY = 'cpan:DROLSKY';
 }
 
 use strict;
@@ -257,6 +260,10 @@ sub DEMOLISH {
 
     $self->_new_migrator()->_drop_database();
 }
+
+=for Pod::Coverage .*
+
+=cut
 
 __PACKAGE__->meta()->make_immutable();
 
