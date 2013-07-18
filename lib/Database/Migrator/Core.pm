@@ -1,6 +1,6 @@
 package Database::Migrator::Core;
 {
-  $Database::Migrator::Core::VERSION = '0.07';
+  $Database::Migrator::Core::VERSION = '0.08';
 }
 BEGIN {
   $Database::Migrator::Core::AUTHORITY = 'cpan:DROLSKY';
@@ -13,6 +13,7 @@ use namespace::autoclean;
 use Database::Migrator::Types qw( ArrayRef Bool Dir File Maybe Str );
 use DBI;
 use Eval::Closure qw( eval_closure );
+use File::Slurp qw( read_file );
 use Log::Dispatch;
 use Moose::Util::TypeConstraints qw( duck_type );
 
@@ -281,7 +282,7 @@ Database::Migrator::Core - Core role for Database::Migrator implementation class
 
 =head1 VERSION
 
-version 0.07
+version 0.08
 
 =head1 SYNOPSIS
 

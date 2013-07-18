@@ -1,6 +1,6 @@
 package Database::Migrator::Types;
 {
-  $Database::Migrator::Types::VERSION = '0.07';
+  $Database::Migrator::Types::VERSION = '0.08';
 }
 BEGIN {
   $Database::Migrator::Types::AUTHORITY = 'cpan:DROLSKY';

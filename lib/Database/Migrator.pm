@@ -1,6 +1,6 @@
 package Database::Migrator;
 {
-  $Database::Migrator::VERSION = '0.07';
+  $Database::Migrator::VERSION = '0.08';
 }
 BEGIN {
   $Database::Migrator::AUTHORITY = 'cpan:DROLSKY';
@@ -18,7 +18,7 @@ Database::Migrator - A system for implementing database migrations
 
 =head1 VERSION
 
-version 0.07
+version 0.08
 
 =head1 DESCRIPTION
 
@@ -189,6 +189,12 @@ still strongly recommend that you make all your migrations idempotent. This is
 much safer. For example, if the process applying migrations is killed, it's
 possible that it will be killed after a migration is applied but before that
 fact has been recorded.
+
+=head1 SUPPORT
+
+Please submit bugs to the CPAN RT system at
+http://rt.cpan.org/NoAuth/Bugs.html?Dist=Database-Migrator or via email at
+bug-database-migrator@rt.cpan.org.
 
 =head1 AUTHOR
 

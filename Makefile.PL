@@ -22,6 +22,7 @@ my %WriteMakefileArgs = (
   "PREREQ_PM" => {
     "DBI" => 0,
     "Eval::Closure" => 0,
+    "File::Slurp" => 0,
     "File::Temp" => 0,
     "Log::Dispatch" => 0,
     "Log::Dispatch::TestDiag" => 0,
@@ -45,7 +46,7 @@ my %WriteMakefileArgs = (
     "File::Find" => 0,
     "Test::More" => "0.88"
   },
-  "VERSION" => "0.07",
+  "VERSION" => "0.08",
   "test" => {
     "TESTS" => "t/*.t"
   }
