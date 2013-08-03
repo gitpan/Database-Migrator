@@ -40,5 +40,5 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Database-Migrator
   homepage: http://metacpan.org/release/Database-Migrator
   repository: git://git.urth.org/Database-Migrator.git
-version: 0.08
+version: 0.09
 x_authority: cpan:DROLSKY

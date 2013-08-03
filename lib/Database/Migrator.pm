@@ -1,6 +1,6 @@
 package Database::Migrator;
 {
-  $Database::Migrator::VERSION = '0.08';
+  $Database::Migrator::VERSION = '0.09';
 }
 BEGIN {
   $Database::Migrator::AUTHORITY = 'cpan:DROLSKY';
@@ -18,7 +18,7 @@ Database::Migrator - A system for implementing database migrations
 
 =head1 VERSION
 
-version 0.08
+version 0.09
 
 =head1 DESCRIPTION
 

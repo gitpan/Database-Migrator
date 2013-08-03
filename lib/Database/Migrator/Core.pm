@@ -1,6 +1,6 @@
 package Database::Migrator::Core;
 {
-  $Database::Migrator::Core::VERSION = '0.08';
+  $Database::Migrator::Core::VERSION = '0.09';
 }
 BEGIN {
   $Database::Migrator::Core::AUTHORITY = 'cpan:DROLSKY';
@@ -257,14 +257,14 @@ sub _build_dbh {
     );
 }
 
-sub  _numeric_or_alpha_sort {
+sub _numeric_or_alpha_sort {
     my ( $a_num, $a_alpha ) = $a->basename() =~ /^(\d+)(.+)/;
     my ( $b_num, $b_alpha ) = $b->basename() =~ /^(\d+)(.+)/;
 
     $a_num ||= 0;
     $b_num ||= 0;
 
-    return $a_num <=> $b_num or $a_alpha cmp $b_alpha;
+    return ( $a_num <=> $b_num or $a_alpha cmp $b_alpha );
 }
 
 
@@ -282,7 +282,7 @@ Database::Migrator::Core - Core role for Database::Migrator implementation class
 
 =head1 VERSION
 
-version 0.08
+version 0.09
 
 =head1 SYNOPSIS
 

@@ -1,6 +1,6 @@
 package Test::Database::Migrator;
 {
-  $Test::Database::Migrator::VERSION = '0.08';
+  $Test::Database::Migrator::VERSION = '0.09';
 }
 BEGIN {
   $Test::Database::Migrator::AUTHORITY = 'cpan:DROLSKY';
