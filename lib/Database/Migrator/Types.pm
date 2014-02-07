@@ -1,11 +1,5 @@
 package Database::Migrator::Types;
-{
-  $Database::Migrator::Types::VERSION = '0.09';
-}
-BEGIN {
-  $Database::Migrator::Types::AUTHORITY = 'cpan:DROLSKY';
-}
-
+$Database::Migrator::Types::VERSION = '0.10';
 use strict;
 use warnings;
 

@@ -1,11 +1,5 @@
 package Database::Migrator::Core;
-{
-  $Database::Migrator::Core::VERSION = '0.09';
-}
-BEGIN {
-  $Database::Migrator::Core::AUTHORITY = 'cpan:DROLSKY';
-}
-
+$Database::Migrator::Core::VERSION = '0.10';
 use strict;
 use warnings;
 use namespace::autoclean;
@@ -20,6 +14,10 @@ use Moose::Util::TypeConstraints qw( duck_type );
 use Moose::Role;
 
 with 'MooseX::Getopt::Dashes';
+
+MooseX::Getopt::OptionTypeMap->add_option_type_to_map(
+    Maybe [Str] => '=s',
+);
 
 requires qw(
     _create_database
@@ -191,7 +189,7 @@ sub _run_one_migration {
     return if $self->dry_run();
 
     my $table = $self->dbh()->quote_identifier( $self->migration_table() );
-    $self->dbh()->do( "INSERT INTO $table VALUES (?)", undef, $name );
+    $self->dbh()->do( "INSERT INTO $table (migration) VALUES (?)", undef, $name );
 
     return;
 }
@@ -212,9 +210,8 @@ sub _build_pending_migrations {
     }
 
     return [
-        sort _numeric_or_alpha_sort
-            grep { !$ran{ $_->basename() } }
-            grep { $_->is_dir() }
+        sort _numeric_or_alpha_sort grep { !$ran{ $_->basename() } }
+            grep                         { $_->is_dir() }
             $self->migrations_dir()->children( no_hidden => 1 )
     ];
 }
@@ -282,7 +279,7 @@ Database::Migrator::Core - Core role for Database::Migrator implementation class
 
 =head1 VERSION
 
-version 0.09
+version 0.10
 
 =head1 SYNOPSIS
 
@@ -425,7 +422,7 @@ Dave Rolsky <autarch@urth.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2013 by MaxMind, Inc..
+This software is Copyright (c) 2014 by MaxMind, Inc..
 
 This is free software, licensed under:
 

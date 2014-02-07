@@ -1,11 +1,5 @@
 package Database::Migrator;
-{
-  $Database::Migrator::VERSION = '0.09';
-}
-BEGIN {
-  $Database::Migrator::AUTHORITY = 'cpan:DROLSKY';
-}
-
+$Database::Migrator::VERSION = '0.10';
 # ABSTRACT: A system for implementing database migrations
 
 __END__
@@ -18,7 +12,7 @@ Database::Migrator - A system for implementing database migrations
 
 =head1 VERSION
 
-version 0.09
+version 0.10
 
 =head1 DESCRIPTION
 
@@ -47,8 +41,8 @@ with numbers, they are sorted by these numbers, otherwise they are sorted
 alphabetically.
 
 The migration directory can either contain files with SQL or Perl. If a file
-ends in ".sql", the migration runner code will feed it the `mysql` command
-line utility.
+ends in ".sql", the migration runner code will feed it to the appropriate
+command line utility for your database.
 
 Otherwise the file is assumed to contain Perl code. This code is expected to
 return a single anonymous subroutine when C<eval>ed. This subroutine will then
@@ -202,7 +196,7 @@ Dave Rolsky <autarch@urth.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2013 by MaxMind, Inc..
+This software is Copyright (c) 2014 by MaxMind, Inc..
 
 This is free software, licensed under:
 

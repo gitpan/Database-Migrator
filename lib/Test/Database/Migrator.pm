@@ -1,11 +1,5 @@
 package Test::Database::Migrator;
-{
-  $Test::Database::Migrator::VERSION = '0.09';
-}
-BEGIN {
-  $Test::Database::Migrator::AUTHORITY = 'cpan:DROLSKY';
-}
-
+$Test::Database::Migrator::VERSION = '0.10';
 use strict;
 use warnings;
 use namespace::autoclean;

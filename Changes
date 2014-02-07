@@ -1,3 +1,14 @@
+0.10     2014-02-06
+
+- Previously, passing any one of username, password, host, or port from the
+  command line would set the relevant attribute's value to "1", rather than
+  what you passed. Reported by Lasse Makholm. RT #92726.
+
+- The SQL used to insert a migration into the migration table now uses the
+  column name. This allows you to put other columns in the table. Patch by
+  Lasse Makholm. RT #92725.
+
+
 0.09     2013-08-03
 
 - Two migrations that started with the same number (01-foo and 01-bar) would
