@@ -1,5 +1,5 @@
 package Database::Migrator::Core;
-$Database::Migrator::Core::VERSION = '0.10';
+$Database::Migrator::Core::VERSION = '0.11';
 use strict;
 use warnings;
 use namespace::autoclean;
@@ -139,7 +139,7 @@ sub create_or_update_database {
 
     if ( $self->_database_exists() ) {
         my $database = $self->database();
-        $self->logger()->info("The $database database already exists");
+        $self->logger()->debug("The $database database already exists");
     }
     else {
         $self->_create_database();
@@ -163,7 +163,7 @@ sub _run_one_migration {
 
     my $name = $migration->basename();
 
-    $self->logger->info("Running migration - $name");
+    $self->logger()->info("Running migration - $name");
 
     my @files = grep { !$_->is_dir() } $migration->children( no_hidden => 1 );
 
@@ -279,7 +279,7 @@ Database::Migrator::Core - Core role for Database::Migrator implementation class
 
 =head1 VERSION
 
-version 0.10
+version 0.11
 
 =head1 SYNOPSIS
 

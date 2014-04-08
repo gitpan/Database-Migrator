@@ -1,5 +1,5 @@
 package Test::Database::Migrator;
-$Test::Database::Migrator::VERSION = '0.10';
+$Test::Database::Migrator::VERSION = '0.11';
 use strict;
 use warnings;
 use namespace::autoclean;

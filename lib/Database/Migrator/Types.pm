@@ -1,5 +1,5 @@
 package Database::Migrator::Types;
-$Database::Migrator::Types::VERSION = '0.10';
+$Database::Migrator::Types::VERSION = '0.11';
 use strict;
 use warnings;
 

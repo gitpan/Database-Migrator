@@ -2,7 +2,7 @@ NAME
     Database::Migrator - A system for implementing database migrations
 
 VERSION
-    version 0.10
+    version 0.11
 
 DESCRIPTION
     This distribution consists of a single role, Database::Migrator::Core.

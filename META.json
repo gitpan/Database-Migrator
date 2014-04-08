@@ -4,7 +4,7 @@
       "Dave Rolsky <autarch@urth.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 5.012, CPAN::Meta::Converter version 2.131560",
+   "generated_by" : "Dist::Zilla version 5.015, CPAN::Meta::Converter version 2.131560",
    "license" : [
       "artistic_2"
    ],
@@ -74,7 +74,7 @@
          "web" : "http://git.urth.org/Database-Migrator.git"
       }
    },
-   "version" : "0.10",
+   "version" : "0.11",
    "x_authority" : "cpan:DROLSKY",
    "x_contributors" : [
       "Olaf Alders <olaf@wundersolutions.com>"
